@@ -1,0 +1,53 @@
+# Virtuális környezet és titkos kulcsok
+.venv/
+.env
+
+# Python és teszt gyorsítótárak
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Jupyter és modell súlyok
+.ipynb_checkpoints/
+*.weights.h5
+
+# Kísérleti generátorok: csak az a három fájl kerül fel, amely a futtatáshoz kell
+# (a futtató induláskor ezek ujjlenyomatát ellenőrzi, nélkülük el sem indul)
+experiments/generators/*
+!experiments/generators/nb_walkforward.py
+!experiments/generators/build_notebook_v8.py
+!experiments/generators/build_notebook_v8_5.py
+
+# Adatok: jogi okból egyetlen letöltött adatfájl sem kerülhet a repóba (Yahoo, FINRA, SEC EDGAR,
+# FRED, GPR). Mindenki maga tölti le őket az 1_setup.bat-tal (experiments/runners/fetch_data.py);
+# a helyi cache, a pillanatkép, a futások kimenete és a golden-teszt fagyasztott adata helyben marad.
+/data/
+/tests/golden/data/
+fnspid*/
+*.jsonl.gz
+*.parquet
+
+# Futási eredmények: csak a közzétett kísérletek (results/test1, results/test2) és a
+# mappastruktúra .gitkeep fájljai kerülnek fel
+/results/*
+!/results/test1/
+!/results/test2/
+!/results/figures/
+/results/figures/*
+!/results/figures/.gitkeep
+!/results/tables/
+/results/tables/*
+!/results/tables/.gitkeep
+
+# IDE és OS fájlok
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+*.log

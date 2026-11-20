@@ -1,0 +1,280 @@
+{
+  "protocol": {
+    "schema": 1,
+    "raw_start": "2001-02-01",
+    "date_pairs": [
+      [
+        "2021-01-29",
+        "2021-02-01"
+      ],
+      [
+        "2021-03-09",
+        "2021-03-10"
+      ],
+      [
+        "2021-05-12",
+        "2021-05-13"
+      ],
+      [
+        "2021-07-12",
+        "2021-07-13"
+      ],
+      [
+        "2021-09-09",
+        "2021-09-10"
+      ],
+      [
+        "2021-11-09",
+        "2021-11-10"
+      ],
+      [
+        "2022-01-28",
+        "2022-01-31"
+      ],
+      [
+        "2022-03-08",
+        "2022-03-09"
+      ],
+      [
+        "2022-05-11",
+        "2022-05-12"
+      ],
+      [
+        "2022-07-11",
+        "2022-07-12"
+      ],
+      [
+        "2022-09-08",
+        "2022-09-09"
+      ],
+      [
+        "2022-11-08",
+        "2022-11-09"
+      ],
+      [
+        "2023-01-27",
+        "2023-01-30"
+      ],
+      [
+        "2023-03-07",
+        "2023-03-08"
+      ],
+      [
+        "2023-05-10",
+        "2023-05-11"
+      ],
+      [
+        "2023-07-17",
+        "2023-07-18"
+      ],
+      [
+        "2023-09-07",
+        "2023-09-08"
+      ],
+      [
+        "2023-11-07",
+        "2023-11-08"
+      ],
+      [
+        "2024-01-26",
+        "2024-01-29"
+      ],
+      [
+        "2024-03-05",
+        "2024-03-06"
+      ],
+      [
+        "2024-05-08",
+        "2024-05-09"
+      ],
+      [
+        "2024-07-15",
+        "2024-07-16"
+      ],
+      [
+        "2024-09-12",
+        "2024-09-13"
+      ],
+      [
+        "2024-11-05",
+        "2024-11-06"
+      ],
+      [
+        "2025-01-31",
+        "2025-02-03"
+      ],
+      [
+        "2025-03-11",
+        "2025-03-12"
+      ],
+      [
+        "2025-05-07",
+        "2025-05-08"
+      ],
+      [
+        "2025-07-14",
+        "2025-07-15"
+      ],
+      [
+        "2025-09-11",
+        "2025-09-12"
+      ],
+      [
+        "2025-11-11",
+        "2025-11-12"
+      ]
+    ],
+    "versions": [
+      "V8",
+      "V8.5"
+    ],
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ],
+    "years": 10,
+    "horizon": 1,
+    "split": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "purge": 21,
+    "embargo": 5,
+    "selection_seed": 42,
+    "selection_metric": "validation_adjusted_close_MAPE",
+    "quantiles": [
+      0.05,
+      0.25,
+      0.5,
+      0.75,
+      0.95
+    ],
+    "iteration_grid": [
+      50,
+      100,
+      200,
+      400
+    ],
+    "v85_hpo_configurations": 30,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "subsample_freq": 1,
+    "threads": 1,
+    "max_attempts_per_invocation": 3
+  },
+  "snapshot_id": "97b83d32f9f95dd1eda592473f5e41889b8761213cee4e1ea2524bd211ba01de",
+  "code": {
+    "quantimate/__init__.py": "8583c14494b80f6670f442e65ce521e560c9f4ab52503cb34724d5a58debd4c7",
+    "quantimate/backtest.py": "3e5cf580760060d0cc35b89948fe40da79ae5a849a036cf1b0044dd91a39c498",
+    "quantimate/bayes.py": "71a76b2912fbb73ae1f4c585d0da937ff5f45bbce599c175771234976c5b9ecd",
+    "quantimate/calibration.py": "af467b0d7ad8a6e4cf4f709e5ff5b1eddce73dca042604263fdc36ab6f04c290",
+    "quantimate/collect.py": "5e40632a21389a81ec718d6104fad3715dea4036889a9863e9be2011ac87775c",
+    "quantimate/config.py": "cdf42cfc714529a8d4589073a78081142ff435317391f1a5970a03d1d232066d",
+    "quantimate/conformal.py": "8add95e66f0b9c1ea2d821d61ee755c5e79fa34a215bd119333b948e601604f4",
+    "quantimate/data.py": "a0f010ee64c4f3d4e6b74c57d94e9eb2b5e77332e491c53caa46f8867b6ed408",
+    "quantimate/earnings.py": "8952dbd6c0fdf233923ef00e356d685c89dffad5c10c57b61b9ec4a6b6cc104f",
+    "quantimate/ensemble.py": "119d79a435167465666584d36552c76eb196a3ec995fa25a4ad629ed1498531b",
+    "quantimate/evaluation.py": "655e8bbb217e4fa2064ec04a5cd916baf7be690c2eb0ee1d2e378a0a0f4b1b6f",
+    "quantimate/execution.py": "b62b3397c57ebce2351743f83d4e3abc59ab442268fed3b2349938f80e15caa6",
+    "quantimate/experiment.py": "609698c1d952d55537afe7cd5ff3ea764456821cd0a5030e2b81aae1a4c517af",
+    "quantimate/experiment_data.py": "faf60613eba5dfca196cc04b562466e33143510e6f79077a9bbe331b726a64af",
+    "quantimate/experiment_protocol.py": "75ba7f067c66e335c9297378ebc980a1e4ca10431e0ce010e7f4aa105b4d27dc",
+    "quantimate/experiment_runner.py": "a6f4bdb58684eaca7b77bb9e2ff4ce282f1d08542f76903523e2b2ae5cbcef6a",
+    "quantimate/explain.py": "8505d6bef9b90e3aaac0d05562fd0a9d12ab1b7586060a8f05d0d9b7b39111b4",
+    "quantimate/features.py": "34763d09b63a1842e4e6bf05e52861d947f67391a83cba111a6cbe5247352198",
+    "quantimate/fracdiff.py": "a398e7c4410fda554b7240b84ca058e08b4008c4e61ba0b558eb3d9d75fcade6",
+    "quantimate/fundamentals.py": "f68c2bff78f913c2457cecf72e2a7cc3ee554c276ff0a2a4e685b52328ee08cf",
+    "quantimate/geo.py": "4bb2bed118004991275240a2f92f6bfce7d1ce8f945e627f5e8dbbb418b3435f",
+    "quantimate/hpo.py": "847d93fbe8e1f8ad701b6e9bd84b7746e6733bf2cb50c5e24ec430410a2be604",
+    "quantimate/intraday.py": "7f8186791e3623b358d6d61f15c718fe4e9e8b482baa2b8c292895b3ccb228f3",
+    "quantimate/live_ledger.py": "5f5bd63ec07a11d31e9f0a253648df6d20b15bde17006f69537eaaf1d8603d44",
+    "quantimate/macro.py": "9e1b9080c4b23782fbca3d551de707faf913ce4ebf3b3d32172dcbd489d500e3",
+    "quantimate/metalabel.py": "9f1dd08f676b1936e388580ddbf4a37c1c7ead99eb5e7e0e5390a5d86ecb1e36",
+    "quantimate/models.py": "3e021072a68189a33e06ba956a215eceffdfed32676b75bb50c370f2526f501d",
+    "quantimate/models_gbdt.py": "0180ba79670f2daed37a9373f7b9be0309b82bd2162a2691a975985268bdc6da",
+    "quantimate/models_zeroshot.py": "fa6b22556ae86216489a93fa5394d8008474b79083e4a296f132638852449e66",
+    "quantimate/news_history.py": "070982514a46d608e390c47fe13d81b031aaf7fdc6dc776b32b3b6095cd00dfc",
+    "quantimate/pipeline.py": "c10256734907e0640bbf9a099f13d5b6062d2ad3f62ef134bc4fa2adabb5b503",
+    "quantimate/pit.py": "dabc420ee8addf390eeb7206da5e584351d2bdb6b3997f110fb90e8441d54e61",
+    "quantimate/pooled.py": "4849dee58af5b8b7bba51a59fa288895172e1b2ac9a9eea622fb828957110cbb",
+    "quantimate/regimes.py": "bde636dd52b6d5d3638e3802d73d02ae512170cb9e7423824576d093db2bf194",
+    "quantimate/regimes_jump.py": "da1521b0060920efb923cf452e9acad8fde4f38577d7956592ebf6e569ad5b78",
+    "quantimate/splits.py": "3117437b036ecb9ee4446cfcdec32bedd56d6498d08b7c3a26c68c03dea9f585",
+    "quantimate/targets.py": "2648603f0b22ad4584a675bb7a3c624055d6be5f2670b8289cb3eb52e72bcb19",
+    "quantimate/validation_cpcv.py": "19eb8492ed15e8ec0179c7f5d4e9ef2b7c601d169c17586187b55f95b4c5517b",
+    "quantimate/volatility.py": "93d86edccb55da947b60864d01ffcbdcc9394634b9e8ea2e912d018ea1fee4d4",
+    "run_experiments.py": "0982396a9feaf763d2c5da724926c2ad2e64bbdfcecb8fe1015b0142d9f388ea",
+    "scripts/nb_walkforward.py": "4525d9005216634b798c251adf840cbc09d1c64c98191bc29c5f05bebb749706",
+    "scripts/build_notebook_v8.py": "d763744ea40ec6a2251c0ae4e0cefd5db3fc8ada9f393fc0eb13aca011f46bf0",
+    "scripts/build_notebook_v8_5.py": "27662a0a057268a7f9b2ed0b413018241bbbcf014288ad75742e49d260e7419d",
+    "mainV8.ipynb": "1066dfd8ad91a97e299287b386a40a50ef8ea456fdeed7ec9a241b2ff110b6e4",
+    "mainV8_5.ipynb": "942c0ca945f1ab3eba3b6d79a379d7f8314bba2e493b44b5916b0ffba9d1dd53"
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.5.1",
+      "pandas": "3.0.3",
+      "scipy": "1.18.0",
+      "scikit-learn": "1.9.0",
+      "hmmlearn": "0.3.3",
+      "lightgbm": "4.6.0",
+      "pyarrow": "24.0.0",
+      "nbclient": "0.11.0",
+      "nbformat": "5.10.4",
+      "ipykernel": "7.3.0"
+    }
+  },
+  "experiment_id": "ca27613c1cf05abaaa559e4f3f68417441d9a7cbccb1fba29a609c8dfaf2cde7"
+}

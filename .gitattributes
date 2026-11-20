@@ -1,0 +1,6 @@
+# A Windows-indítófájlok mindig CRLF sorvéggel kerülnek ki.
+*.bat text eol=crlf
+
+# A közzétett eredményfájlok bájtra pontosan maradnak: az összefoglaló Excel
+# ezek SHA-256-ját idézi, ezért a git nem végezhet rajtuk sorvég-átalakítást.
+/results/** -text

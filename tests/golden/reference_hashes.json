@@ -1,0 +1,36 @@
+{
+  "golden_end": "2026-07-02",
+  "shape_feats": [
+    2464,
+    57
+  ],
+  "n_labeled": 2443,
+  "splits": {
+    "train": [
+      89,
+      1683,
+      1595
+    ],
+    "val": [
+      1710,
+      2049,
+      340
+    ],
+    "test": [
+      2076,
+      2442,
+      367
+    ]
+  },
+  "n_regime_cols": 3,
+  "sha_feats_nonregime": "3efd40966e79580649a839d67ebac2bb006273f22e45b73a31761e675d9655ed",
+  "sha_X_scaled_nonregime": "240b292ef01379406cd97c1280178de39fd7d8f530918bbd8ea79e506d748fe8",
+  "sha_Y_all": "4ae6a24c05550a49393fa9083fb4d4a60baa82686c6bdead552117017856138e",
+  "sha_splits": "17f6d1e639550d7497c14dacc6b049d131ecd510099ac4f36f515b6bb6fef999",
+  "regime_names": [
+    "Csökkenő tendencia",
+    "Emelkedő tendencia",
+    "Turbulens"
+  ],
+  "winner_val_pinball": 0.25919360917002904
+}

@@ -1,0 +1,10 @@
+# QuantiMate V7 — OPCIONÁLIS függőségek (FinBERT, Chronos zero-shot)
+# Telepítés:  python -m pip install -r requirements-optional.txt
+# A fő lánc ezek NÉLKÜL is fut: a szentiment- és zero-shot szakaszok import-guard
+# mögött őszintén kihagyják magukat, ha a csomag/súly hiányzik.
+
+# CPU-only torch (a CUDA-verzió sokszorosa a méretnek — CPU-n futunk):
+#   python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch==2.12.1
+transformers==5.13.0
+chronos-forecasting==2.3.1
