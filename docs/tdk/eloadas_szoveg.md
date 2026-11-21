@@ -46,11 +46,32 @@
 
 ## 7. HMM: milyen állapotban van a piac?
 
-- A piac nem mindig ugyanúgy viselkedik. Vannak nyugodt emelkedő szakaszok, csökkenő szakaszok és turbulens napok. Ezeket az állapotokat közvetlenül nem látjuk, csak a hozamokból és az ingadozásból következtethetünk rájuk. Erre való a rejtett Markov-modell.
-- A bal oldali ábrán a három állapot látható. A nyilak azt mutatják, milyen eséllyel vált át a piac egyik napról a másikra egyik állapotból a másikba.
-- A képlet a napi frissítést írja le. A tegnapi valószínűségeket átvezetem az átmeneteken, majd megnézem, mennyire illik a mai megfigyelés az egyes állapotokhoz.
-- A számítás csak az aznapig ismert adatot használja. A könyvtár alapbeállítása a teljes idősorból számolna, vagyis egy múltbeli nap állapotát a későbbi napok ismeretében becsülné meg. Ezért ezt a részt saját magam írtam meg.
-- A három valószínűséget a modell új bemenetként kapja meg.
+- A piac nem mindig ugyanúgy viselkedik. Vannak nyugodt emelkedő szakaszok, csökkenő szakaszok és turbulens napok. Ezeket közvetlenül nem látjuk, csak a hozamokból és az ingadozásból következtethetünk rájuk. Erre való a rejtett Markov-modell.
+- A bal oldali ábrán a három állapot látható, a nyilak pedig azt, milyen eséllyel vált át a piac egyik napról a másikra.
+- A képlet a napi frissítést írja le, és két részből áll.
+- Az első rész a szumma, ez a várakozás. A tegnapi valószínűségeket, a p_t−1-et végigvezetem az átmenettáblán, az A-n, vagyis megnézem, honnan milyen eséllyel juthat ma a piac az adott állapotba.
+- A második rész a b_k, ez az illeszkedés: mennyire jellemző a mai hozam és ingadozás az adott állapotra.
+- A kettőt összeszorzom, majd úgy osztom el, hogy a három valószínűség együtt 100 százalék legyen. Ezt jelzi az arányosság jele.
+- Ha például tegnap emelkedő piac volt, de ma nagyot esik az ár és nagy a kilengés, akkor a turbulens állapot valószínűsége hirtelen megnő.
+- A számítás csak az aznapig ismert adatot használja. A könyvtár alapbeállítása a későbbi napokat is figyelembe venné, ezért ezt a részt saját magam írtam meg.
+- A három valószínűséget a modell minden napra új bemenetként kapja meg.
+
+### Háttér a képlethez (nem kell elmondani, de kérdésnél jól jön)
+
+A képlet: p_t(k) ∝ b_k(x_t) · Σ_j p_t−1(j) · A_jk, ahol j és k az 1, 2, 3 állapot.
+
+- **x_t, a mai megfigyelés:** két szám, a napi loghozam és az EWMA-volatilitás. Mindkettőt a tanítószakasz átlagával és szórásával standardizálom, hogy egy skálán legyenek.
+- **p_t(k):** annak a valószínűsége, hogy a piac a t-edik napon a k-adik állapotban van, a t-edik napig ismert adatok alapján. Ez a bal oldal, ezt számolom ki minden napra.
+- **p_t−1(j), a tegnapi tudás:** ugyanez az előző napra. Ebből indul a frissítés.
+- **A_jk, az átmenettábla:** annak az esélye, hogy a piac egy nap alatt a j-edik állapotból a k-adikba kerül. Három-szor-hármas táblázat. Az átlójában nagy számok vannak, mert a piac általában több napig ugyanabban az állapotban marad.
+- **A szumma:** a három tegnapi állapotra összeadja, honnan milyen eséllyel lehet ma a k-adik állapotba jutni. Ez a mai várakozás, a mai adat megnézése előtt.
+- **b_k(x_t), az illeszkedés:** minden állapotnak saját kétdimenziós normális eloszlása van, saját átlagos hozammal, ingadozással és szórásokkal. A b_k azt mondja meg, mennyire valószínű a mai megfigyelés, ha a piac a k-adik állapotban van. A turbulens állapothoz nagy ingadozás tartozik, ezért egy nagy kilengésnél ennek az értéke lesz a legnagyobb.
+- **A szorzás:** csak az az állapot kap nagy súlyt, amelyik a tegnapiból elérhető, és a mai adathoz is illik.
+- **Az arányosság jele (∝):** a három szorzat összege nem egy. Mindegyiket elosztom a három összegével, így valószínűségeket kapok.
+- **Példa:** tegnap 80 százalék emelkedő, 15 csökkenő, 5 turbulens. Ma nagy esés és nagy kilengés. A várakozás még az emelkedő felé húz, de a mai adathoz a turbulens illik a legjobban, ezért a normálás után a turbulens valószínűsége megugrik.
+- **Honnan jönnek a paraméterek?** Az állapotok eloszlásait, az átmenettáblát és a kezdő valószínűségeket a tanítószakaszon becslem az EM-algoritmussal (Baum–Welch), 300 iterációval, rögzített véletlenszámmal (seed 42).
+- **Honnan jönnek a nevek?** Utólag adom őket: a legnagyobb ingadozású állapot a turbulens, a másik kettőt az átlagos hozamuk alapján nevezem csökkenőnek, illetve emelkedőnek.
+- **Miért saját kód?** A hmmlearn könyvtár beépített függvénye simított valószínűséget ad, ami a teljes idősort használja, vagyis egy 2021-es nap állapotához a 2022-es adatot is felhasználná. Az én számításom csak az első t napot nézi, és ezt egy teszt is ellenőrzi: a t-edik nap értéke ugyanaz, akár csak t-ig, akár a teljes sorra számolom.
 
 ## 8. Kétlépcsős kapu
 
