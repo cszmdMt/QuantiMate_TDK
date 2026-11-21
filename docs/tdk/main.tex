@@ -35,7 +35,8 @@
 
 \title[QuantiMate]{Tőzsdei prediktív folyamatok és algoritmikus\\döntéstámogató rendszerek kvantitatív modellezése}
 \author{Csizmi}
-\institute[EKKE]{Eszterházy Károly Katolikus Egyetem}
+\institute[EKKE]{}
+\titlegraphic{\includegraphics[height=2.3cm]{ekke_logo.png}}
 \date[]{2026.11.25.}
 
 \begin{document}
@@ -94,7 +95,8 @@
 \end{frame}
 
 % 4 | 2:00--2:50
-\begin{frame}{Két változat, közös motor}
+\begin{frame}{Két bemutatott verzió, közös motor}
+  \framesubtitle{A QuantiMate több verzióban készült; az előadás ezek közül a V8-at és a V8.5-öt mutatja be}
   \centering\small
   \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{@{}L{.22\linewidth}L{.34\linewidth}L{.34\linewidth}@{}}
@@ -108,9 +110,10 @@
     \bottomrule
   \end{tabular}
   \par\bigskip\raggedright
-  \textbf{Kísérlet:} 2 verzió $\times$ 2 cél (ár, ingadozás) $\times$ 3 táv
-  (1, 5, 21 nap) $\times$ 30 dátumpár (2021--2025) $\times$ 50 seed
-  $=$ \textbf{18\,000 futás}.
+  \textbf{Első mérés:} 2 verzió $\times$ egynapos ár $\times$ 30 dátumpár
+  $\times$ 50 seed $=$ \textbf{3000 futás}, még kapu nélkül.\par\smallskip
+  \textbf{Végleges mérés:} 2 verzió $\times$ 2 cél (ár, ingadozás) $\times$ 3 táv
+  (1, 5, 21 nap) $\times$ 30 dátumpár $\times$ 50 seed $=$ \textbf{18\,000 futás}.
   % A két verzió ugyanabból az adatból, ugyanazzal a kóddal fut.
 \end{frame}
 
@@ -285,7 +288,6 @@
     Sok jelöltből egy véletlenül jó & SPA az összes jelöltre & legjobb kiválasztása, páros DM-próba\\
     Időszakhoz kötött előny & ismétlődés a tanítóablakon belül & egyetlen validációs időszak\\
     Rezsim jövőbelátás nélkül & HMM forward-szűrés & simított HMM-valószínűség\\
-    Kis, táblázatos adat & LightGBM & neurális hálók (V5--V7-ben gyengébbek)\\
     Zajos variancia-mérés & QLIKE (Patton 2011) & abszolút hiba\\
     \bottomrule
   \end{tabular}
@@ -294,8 +296,8 @@
 \end{frame}
 
 % 10 | 8:00--9:00
-\begin{frame}{Első mérés és végleges futás: mit változtatott a kapu?}
-  \framesubtitle{Egynapos ár \,·\, ugyanaz a 29 dátumpár $\times$ 50 seed \,·\, külső előrejelzések}
+\begin{frame}{Első és végleges mérés: mit változtatott a kapu?}
+  \framesubtitle{Egynapos ár \,·\, 3000-es és 18\,000-es futás \,·\, ugyanaz a 29 dátumpár $\times$ 50 seed}
   \centering
   \begin{tikzpicture}[x=1cm, y=0.66cm, font=\small]
     % 0 = az egyszerű tipp hibája; felfelé: a modell többet tévedett
@@ -314,8 +316,8 @@
     \node[font=\scriptsize] at (2.4,-0.4) {V8.5};
     \node[font=\scriptsize] at (5.1,-0.4) {V8};
     \node[font=\scriptsize] at (6.4,-0.95) {V8.5};
-    \node[font=\footnotesize, align=center] at (1.75,-2.1) {\textbf{Első mérés}\\ \scriptsize kapu nélkül};
-    \node[font=\footnotesize, align=center] at (5.75,-2.1) {\textbf{Végleges futás}\\ \scriptsize kétlépcsős kapuval};
+    \node[font=\footnotesize, align=center] at (1.75,-2.1) {\textbf{Első mérés}\\ \scriptsize 3000-es futás, kapu nélkül};
+    \node[font=\footnotesize, align=center] at (5.75,-2.1) {\textbf{Végleges mérés}\\ \scriptsize 18\,000-es futás, kapuval};
     \node[anchor=south west, font=\footnotesize\bfseries, text=black!75] at (-0.2,4.8)
       {Mennyivel tévedett többet a modell, mint az egyszerű tipp?};
   \end{tikzpicture}
@@ -326,6 +328,7 @@
   % Átlagos hiba (MAPE): egyszerű tipp 2,54%; első mérés V8 2,64%, V8.5 2,61%;
   % végleges V8 2,54%, V8.5 2,53%. Relatív eltérés = (modell - tipp) / tipp.
   % Első mérésben a futások 47% / 46%-ában volt jobb a modell, a többiben rosszabb.
+  % A 3000 tervezett futásból 2900 készült el: a 6. párnál a HMM-illesztés leállt (azóta javítva).
   % A 6. pár az első mérésben HMM-hibával elmaradt, ezért a közös 29 páron vetjük össze.
   % Forrás: data/repeated_experiment/main.xlsx és V8_V85_osszehasonlitas.xlsx.
 \end{frame}
@@ -384,7 +387,7 @@
   \par\smallskip\raggedright\small
   A 30 célnapból \textbf{22-n} a rendszer becslése volt közelebb a tényleges
   ingadozáshoz; átlagos hiba 1,06 vs.\ 1,48 százalékpont.
-  Ár: a rendszer mindhárom távon az egyszerű tippet adja (hiba 2,58\,/\,5,19\,/\,9,54\,\%).
+  Ár: a rendszer szinte mindig az egyszerű tippet adja (hiba 2,58\,/\,5,19\,/\,9,54\,\%).
   % Közelebb = kisebb abszolút eltérés a volatilitás-százalékban. A kiválasztás QLIKE-kal
   % történt; QLIKE szerint 23/30 célnapon jobb a modell. 2025 júliusában (28. pár) a
   % hirtelen ugrást egyik becslés sem látta előre. Csak 30 célnap: nem szignifikáns.
