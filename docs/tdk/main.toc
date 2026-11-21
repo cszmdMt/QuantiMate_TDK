@@ -1,0 +1,4 @@
+\babel@toc {magyar}{}\relax 
+\beamer@sectionintoc {1}{Bevezetés}{1}{0}{1}
+\beamer@sectionintoc {2}{Adatok és felépítés}{3}{0}{2}
+\beamer@sectionintoc {3}{Összefoglalás}{13}{0}{3}
