@@ -4,7 +4,7 @@
 
 ## 1. Címdia
 
-- Jó napot kívánok! Csizmadia Máté vagyok, az Eszterházy Károly Katolikus Egyetemről.
+- Jó napot kívánok! Csizmi vagyok, az Eszterházy Károly Katolikus Egyetemről.
 - A dolgozatom arról szól, hogyan lehet egy tőzsdei előrejelző rendszert úgy felépíteni, hogy ne csapja be saját magát.
 
 ## 2. Kutatási kérdés
@@ -50,8 +50,8 @@
 - A piac nem mindig ugyanúgy viselkedik. Vannak nyugodt emelkedő szakaszok, csökkenő szakaszok és turbulens napok. Ezeket közvetlenül nem látjuk, csak a hozamokból és az ingadozásból következtethetünk rájuk. Erre való a rejtett Markov-modell.
 - A bal oldali ábrán a három állapot látható, a nyilak pedig azt, milyen eséllyel vált át a piac egyik napról a másikra.
 - A képlet a napi frissítést írja le, és két részből áll.
-- Az első rész a szumma, ez a várakozás. A tegnapi valószínűségeket, a p_t−1-et végigvezetem az átmenettáblán, az A-n, vagyis megnézem, honnan milyen eséllyel juthat ma a piac az adott állapotba.
-- A második rész a b_k, ez az illeszkedés: mennyire jellemző a mai hozam és ingadozás az adott állapotra.
+- Az első rész a szumma, ez a várakozás. A tegnapi valószínűségeket (pₜ₋₁) végigvezetem az átmenettáblán (A), vagyis megnézem, honnan milyen eséllyel juthat ma a piac az adott állapotba.
+- A második rész a bₖ, ez az illeszkedés: mennyire jellemző a mai hozam és ingadozás az adott állapotra.
 - A kettőt összeszorzom, majd úgy osztom el, hogy a három valószínűség együtt 100 százalék legyen. Ezt jelzi az arányosság jele.
 - Ha például tegnap emelkedő piac volt, de ma nagyot esik az ár és nagy a kilengés, akkor a turbulens állapot valószínűsége hirtelen megnő.
 - A számítás csak az aznapig ismert adatot használja. A könyvtár alapbeállítása a későbbi napokat is figyelembe venné, ezért ezt a részt saját magam írtam meg.
@@ -59,14 +59,20 @@
 
 ### Háttér a képlethez (nem kell elmondani, de kérdésnél jól jön)
 
-A képlet: p_t(k) ∝ b_k(x_t) · Σ_j p_t−1(j) · A_jk, ahol j és k az 1, 2, 3 állapot.
+A képlet:
 
-- **x_t, a mai megfigyelés:** két szám, a napi loghozam és az EWMA-volatilitás. Mindkettőt a tanítószakasz átlagával és szórásával standardizálom, hogy egy skálán legyenek.
-- **p_t(k):** annak a valószínűsége, hogy a piac a t-edik napon a k-adik állapotban van, a t-edik napig ismert adatok alapján. Ez a bal oldal, ezt számolom ki minden napra.
-- **p_t−1(j), a tegnapi tudás:** ugyanez az előző napra. Ebből indul a frissítés.
-- **A_jk, az átmenettábla:** annak az esélye, hogy a piac egy nap alatt a j-edik állapotból a k-adikba kerül. Három-szor-hármas táblázat. Az átlójában jellemzően nagy számok vannak, mert a piac általában több napig ugyanabban az állapotban marad.
+> **pₜ(k) ∝ bₖ(xₜ) · Σⱼ pₜ₋₁(j) · Aⱼₖ**
+
+ahol j és k az 1., 2. és 3. állapot, a szumma j = 1-től 3-ig megy.
+
+Felolvasva: „p t k arányos b k x t-szer szumma j p t mínusz egy j A j k”.
+
+- **xₜ, a mai megfigyelés:** két szám, a napi loghozam és az EWMA-volatilitás. Mindkettőt a tanítószakasz átlagával és szórásával standardizálom, hogy egy skálán legyenek.
+- **pₜ(k):** annak a valószínűsége, hogy a piac a t-edik napon a k-adik állapotban van, a t-edik napig ismert adatok alapján. Ez a bal oldal, ezt számolom ki minden napra.
+- **pₜ₋₁(j), a tegnapi tudás:** ugyanez az előző napra. Ebből indul a frissítés.
+- **Aⱼₖ, az átmenettábla:** annak az esélye, hogy a piac egy nap alatt a j-edik állapotból a k-adikba kerül. Három-szor-hármas táblázat. Az átlójában jellemzően nagy számok vannak, mert a piac általában több napig ugyanabban az állapotban marad.
 - **A szumma:** a három tegnapi állapotra összeadja, honnan milyen eséllyel lehet ma a k-adik állapotba jutni. Ez a mai várakozás, a mai adat megnézése előtt.
-- **b_k(x_t), az illeszkedés:** minden állapotnak saját kétdimenziós normális eloszlása van, saját átlagos hozammal, ingadozással és szórásokkal. A b_k azt mondja meg, mennyire valószínű a mai megfigyelés, ha a piac a k-adik állapotban van. A turbulens állapothoz nagy ingadozás tartozik, ezért egy nagy kilengésnél ennek az értéke lesz a legnagyobb.
+- **bₖ(xₜ), az illeszkedés:** minden állapotnak saját kétdimenziós normális eloszlása van, saját átlagos hozammal, ingadozással és szórásokkal. A bₖ azt mondja meg, mennyire valószínű a mai megfigyelés, ha a piac a k-adik állapotban van. A turbulens állapothoz nagy ingadozás tartozik, ezért egy nagy kilengésnél ennek az értéke lesz a legnagyobb.
 - **A szorzás:** csak az az állapot kap nagy súlyt, amelyik a tegnapiból elérhető, és a mai adathoz is illik.
 - **Az arányosság jele (∝):** a három szorzat összege nem egy. Mindegyiket elosztom a három összegével, így valószínűségeket kapok.
 - **Példa:** tegnap 80 százalék emelkedő, 15 csökkenő, 5 turbulens. Ma nagy esés és nagy kilengés. A várakozás még az emelkedő felé húz, de a mai adathoz a turbulens illik a legjobban, ezért a normálás után a turbulens valószínűsége megugrik.
